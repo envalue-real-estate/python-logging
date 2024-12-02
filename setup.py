@@ -6,7 +6,7 @@ setup(
     name='python-logging',
     version=__version__,
 
-    url='https://https://github.com/envalue-real-estate/python-logging',
+    url='https://github.com/envalue-real-estate/python-logging',
     author='Theo van Oostrum',
     author_email='theo.vanoostrum@envalue.com',
 
