@@ -1,7 +1,7 @@
 import logging
 import json
 
-from log_context import get_log_context
+from .log_context import get_log_context
 
 
 class JsonFormatter(logging.Formatter):
