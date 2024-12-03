@@ -15,7 +15,7 @@ setup(
     install_requires=[
         'redis~=5.2'
     ],
-    extra_requires={
+    extras_require={
         'fastapi': [
             'fastapi~=0.115.0',
         ]
