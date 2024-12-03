@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from src.python_logging import __version__
+from python_logging import __version__
 
 setup(
     name='python-logging',
