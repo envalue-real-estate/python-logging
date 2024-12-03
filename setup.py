@@ -13,7 +13,11 @@ setup(
     packages=find_packages(),
 
     install_requires=[
-        'fastapi~=0.115.0',
         'redis~=5.2'
-    ]
+    ],
+    extra_require={
+        'fastapi': [
+            'fastapi~=0.115.0',
+        ]
+    }
 )
