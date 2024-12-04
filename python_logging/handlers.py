@@ -8,15 +8,25 @@ class RedisHandler(logging.Handler):
     list_name = 'logs'
 
     def __init__(self, host: str, port: int = 6379, db: int = 0):
-        self.redis = redis.Redis(host=host, port=port, db=db, password=os.getenv('REDIS_PASSWORD'))
+        self._host = host
+        self._port = port
+        self._db = db
+        self._connection = None
         super().__init__()
 
     def emit(self, record):
-        self.redis.lpush('logs', self.format(record))
+        self._connect().lpush('logs', self.format(record))
 
     def flush(self):
-        self.redis.flushdb()
+        if self._connection:
+            self._connection.flushdb()
 
     def close(self):
-        self.redis.close()
+        if self._connection:
+            self._connection.close()
         super().close()
+
+    def _connect(self) -> redis.Redis:
+        if self._connection is None:
+            self._connection = redis.Redis(host=self._host, port=self._port, db=self._db, password=os.getenv('REDIS_PASSWORD'))
+        return self._connection

@@ -12,17 +12,17 @@ class JsonFormatter(logging.Formatter):
             '@timestamp': datetime.fromtimestamp(record.created).isoformat(),
             'level': record.levelname,
             'message': record.getMessage(),
-            'application': log_context.get_application(),
-            'request_id': log_context.get_request_id(),
+            'application': log_context.application,
+            'request_id': log_context.request_id,
         }
 
-        if log_context.get_request_path() is not None:
+        if log_context.request_path is not None:
             log_object['request'] = {
-                'method': log_context.get_request_method(),
-                'path': log_context.get_request_path()
+                'method': log_context.request_method,
+                'path': log_context.request_path
             }
-        if log_context.get_response_status_code() is not None:
+        if log_context.response_status_code is not None:
             log_object['response'] = {
-                'status_code': log_context.get_response_status_code()
+                'status_code': log_context.response_status_code
             }
         return json.dumps(log_object)
