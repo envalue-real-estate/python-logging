@@ -14,11 +14,11 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         set_log_context(LogContext(request_method=request.method,
                                    request_path=request.url.path,
                                    user_agent=request.headers.get('User-Agent')))
-        self.logger.info(f"Startup {request.url.path}")
+        self.logger.info(f"Startup {request.method} {request.url.path}")
 
         response = await call_next(request)
 
         get_log_context().response_status_code = response.status_code
-        self.logger.info(f"Shutdown {request.url.path}")
+        self.logger.info(f"Shutdown {request.method} {request.url.path}")
 
         return response
