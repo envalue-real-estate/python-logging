@@ -21,10 +21,13 @@ class JsonFormatter(logging.Formatter):
             log_object['request'] = {
                 'method': log_context.request_method,
                 'path': log_context.request_path,
-                'user_agent': log_context.user_agent
+                'user_agent': log_context.user_agent,
+                'client_ip': log_context.client_ip
             }
         if log_context.response_status_code is not None:
             log_object['response'] = {
                 'status_code': log_context.response_status_code
             }
+        if log_context.processing_time is not None:
+            log_object['processing_time'] = log_context.processing_time
         return json.dumps(log_object)

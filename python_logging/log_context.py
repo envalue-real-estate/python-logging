@@ -11,6 +11,8 @@ class LogContext:
     request_path: str | None = None
     user_agent: str | None = None
     response_status_code: int | None = None
+    processing_time: int | None = None
+    client_ip: str | None = None
 
     @property
     def application(self) -> str:
